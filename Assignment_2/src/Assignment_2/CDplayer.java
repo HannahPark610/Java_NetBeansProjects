@@ -21,8 +21,8 @@ class CDplayer {
    }
    
    //Add a cd to colection
-   public void addCD(String title, double cost, int tracks){
-       player[count] = new CD(title,cost,tracks);  //"Storm Front",14.95,10);
+   public void addCD(String cdName, String song, double cost, int tracks){
+       player[count] = new CD(cdName,song,cost,tracks);  //"Storm Front",14.95,10);
        //"Come On Over",14.95,16
        totalCost = totalCost + cost; //0+14.95=14.95, 14.95+14.95
        count++;//1,

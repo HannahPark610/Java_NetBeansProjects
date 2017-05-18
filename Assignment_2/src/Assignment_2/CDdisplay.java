@@ -12,16 +12,26 @@ package Assignment_2;
 public class CDdisplay {
     public static void main(String[] args) {
     CDplayer music = new CDplayer();
-    music.addCD("Storm Front",14.95,10);
-    music.addCD("Come On Over",14.95,16);
-    music.addCD("Sound Track",17.95,33);
-    music.addCD("GraceLand",13.5,11);
+    music.addCD("Ariana grande","Bang Bang",14.99,1);
+    music.addCD("Ariana grande","Breake Free",15.50,5);
+    music.addCD("Ariana grande","Side to Side",15.00,6);
+    music.addCD("Bruno Mars","That's What I Like",15.50,2);
+    music.addCD("Bruno Mars","When I was Your Man",14.99,5);
+    music.addCD("Bruno Mars","Treasure",15.50,8);
+    music.addCD("Adele","Hello",15.75,7);
+    music.addCD("Adele","Some One Like You",15.50,1);
+    music.addCD("Adele","Rolling in the Deep",14.99,4);
+    music.addCD("Cold Play","Fix You",15.00,7);
+    music.addCD("Cold Play","The Sientist",15.50,2);
+    music.addCD("Cold Play","Something Just Like This",14.99,3);
     
+    System.out.println("Select Play Music : ");
     System.out.println(music.toString());
     
-    music.addCD("Sound Track 2",20.5,10);
-    music.addCD("GraceLand 2 ",13.5,15);
+    music.addCD("Bruno Mars","That's What I Like",15.50,13);
+    music.addCD("Cold Play","The Sientist",15.50,20);
     
+    System.out.println("You : ");
     System.out.println(music.toString());
     }
     

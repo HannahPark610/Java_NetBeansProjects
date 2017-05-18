@@ -10,20 +10,23 @@ package Assignment_2;
  * @author CICCC-CIRAC
  */
 public class CD {
-    private String title;
+    private String cdName;
+    private String song;
     private double cost;
     private int tracks;
-    //"Storm Front",14.95,10);
-    public  CD(String name, double price, int numoftracks){
-        title = name;
+    
+    
+    public  CD(String singer, String sname, double price, int numoftracks){
+        cdName = singer;
+        song = sname;
         cost = price;
         tracks = numoftracks;
     }
-    
+     
     public  String details()
     {
         String desc;
-        desc = title + "\t" + cost +"\t"+tracks;
+        desc = cdName + "\t" + song + "\t" + cost +"\t"+tracks;
         return desc;
     }
 }
