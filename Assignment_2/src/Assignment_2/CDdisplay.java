@@ -11,7 +11,9 @@ package Assignment_2;
  */
 public class CDdisplay {
     public static void main(String[] args) {
+        
     CDplayer music = new CDplayer();
+    
     music.addCD("Ariana grande","Bang Bang",14.99,1);
     music.addCD("Ariana grande","Breake Free",15.50,5);
     music.addCD("Ariana grande","Side to Side",15.00,6);

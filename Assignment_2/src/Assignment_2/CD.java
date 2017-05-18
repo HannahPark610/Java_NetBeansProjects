@@ -22,6 +22,36 @@ public class CD {
         cost = price;
         tracks = numoftracks;
     }
+    
+        //private 메모리를 사용할때는 getter, setter는 기본적으로 만들어두는게 좋음.
+    public void setCdName(String singer)  { 
+        this.cdName = singer; 
+    }
+    public void setSong(String sname) { 
+        this.song = sname; 
+    }
+    public void setCost(double price)  { 
+        this.cost = price;  
+    }
+    public void setTracks(int numoftracks)  { 
+        this.tracks = numoftracks; 
+    }
+//    public void setNext(CD pNode)   { this.nextNode = pNode; }
+    public String getCdName()    { 
+        return this.cdName; 
+    }
+    public String getSong()    { 
+        return this.song; 
+    }
+    public double getCost()     { 
+        return this.cost; 
+    }
+    public int getTracks()     { 
+        return this.tracks;  
+    }
+//    public CD getNext()      {   
+//        return this.nextNode; 
+//    }
      
     public  String details()
     {

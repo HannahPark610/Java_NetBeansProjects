@@ -13,18 +13,18 @@ class CDplayer {
    private final CD[] player ;
    private int count;
    private double totalCost;
+   
    //constructor : creates empty CD collections
    public  CDplayer(){
        player= new CD[10];
        count = 0;
-       totalCost =0.0;
+       totalCost = 0.0;
    }
    
    //Add a cd to colection
    public void addCD(String cdName, String song, double cost, int tracks){
-       player[count] = new CD(cdName,song,cost,tracks);  //"Storm Front",14.95,10);
-       //"Come On Over",14.95,16
-       totalCost = totalCost + cost; //0+14.95=14.95, 14.95+14.95
+       player[count] = new CD(cdName, song, cost, tracks); 
+       totalCost = totalCost + cost; 
        count++;//1,
    }
    
