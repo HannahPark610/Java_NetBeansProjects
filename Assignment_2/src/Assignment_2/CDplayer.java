@@ -30,9 +30,9 @@ import java.text.NumberFormat;
    public void addCD(String cdName, String song, double cost, int tracks) {
        if(curNode == null)
        {
-//       player[count] = new CD(cdName, song, cost, tracks); 
-       player = new CD(cdName, song, cost, tracks);
-       curNode = player;
+       player[count] = new CD(cdName, song, cost, tracks); 
+//       player = new CD(cdName, song, cost, tracks);
+       curNode = player[count];
        }
        else
        { 
