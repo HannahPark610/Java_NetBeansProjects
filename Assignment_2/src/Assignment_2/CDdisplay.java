@@ -9,7 +9,10 @@ package Assignment_2;
  *
  * @author CICCC-CIRAC
  */
+import java.io.*;
+
 public class CDdisplay {
+    
     public static void main(String[] args) {
         
     CDplayer music = new CDplayer();
@@ -27,14 +30,7 @@ public class CDdisplay {
     music.addCD("Cold Play","The Sientist",15.50,2);
     music.addCD("Cold Play","Something Just Like This",14.99,3);
     
-    System.out.println("Select Play Music : ");
-    System.out.println(music.toString());
-    
-    music.addCD("Bruno Mars","That's What I Like",15.50,13);
-    music.addCD("Cold Play","The Sientist",15.50,20);
-    
-    System.out.println("You : ");
     System.out.println(music.toString());
     }
-    
+   
 }
