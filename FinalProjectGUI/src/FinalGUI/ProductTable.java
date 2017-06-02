@@ -6,6 +6,8 @@
 
 package FinalGUI;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author hyunyoungpark
@@ -129,7 +131,8 @@ public class ProductTable extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAddActionPerformed
-        // TODO add your handling code here:
+       DefaultTableModel model = (DefaultTableModel) tblProduct.getModel();
+       model.addRow(new object[] {tfProName.getText(),cbCategory.getSelectedItem().toString(), tfPrice.getText()});
     }//GEN-LAST:event_bAddActionPerformed
 
     /**
