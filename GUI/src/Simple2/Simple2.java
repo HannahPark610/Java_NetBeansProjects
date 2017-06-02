@@ -16,7 +16,7 @@ public class Simple2 extends JFrame {
         
         add(b);
         setSize(400,500);
-        JButton b1 = new JButton("click her!!!!!!!");
+        JButton b1 = new JButton("click here!!!!!!!");
         b1.setBounds(130,100,100,40);
         
         add(b1);
