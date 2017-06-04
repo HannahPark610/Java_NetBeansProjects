@@ -13,7 +13,6 @@ import javax.swing.table.DefaultTableModel;
  * @author hyunyoungpark
  */
 public class ProductTable extends javax.swing.JFrame {
-
     /** Creates new form ProductTable */
     public ProductTable() {
         initComponents();
@@ -57,6 +56,8 @@ public class ProductTable extends javax.swing.JFrame {
 
         jLabel2.setText("Category");
 
+        cbCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Electronic", "Art", "Electricity", "Food" }));
+
         jLabel3.setText("Price");
 
         bAdd.setText("Add");
@@ -67,6 +68,11 @@ public class ProductTable extends javax.swing.JFrame {
         });
 
         bUpdate.setText("Update");
+        bUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bUpdateActionPerformed(evt);
+            }
+        });
 
         bDelete.setText("Delete");
 
@@ -80,23 +86,22 @@ public class ProductTable extends javax.swing.JFrame {
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel1)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel3))
-                            .addGap(44, 44, 44)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(tfProName)
-                                .addComponent(cbCategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(tfPrice)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(bAdd)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(bUpdate)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(bDelete)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGap(44, 44, 44)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfProName)
+                            .addComponent(cbCategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tfPrice)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(bAdd)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bUpdate)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bDelete))
                     .addComponent(IMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
@@ -131,9 +136,32 @@ public class ProductTable extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAddActionPerformed
-       DefaultTableModel model = (DefaultTableModel) tblProduct.getModel();
-       model.addRow(new object[] {tfProName.getText(),cbCategory.getSelectedItem().toString(), tfPrice.getText()});
+       IMessage.setText("");
+        DefaultTableModel model = (DefaultTableModel) tblProduct.getModel();
+       if(!tfProName.getText().trim().equals("")){
+          model.addRow(new Object[] {tfProName.getText(),cbCategory.getSelectedItem().toString(), tfPrice.getText()});
+   
+       }else{
+           IMessage.setText("Product Name should not be left blank");
+       }
     }//GEN-LAST:event_bAddActionPerformed
+
+    private void bUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bUpdateActionPerformed
+        IMessage.setText("");
+        DefaultTableModel model = (DefaultTableModel) tblProduct.getModel();
+        if(tblProduct.getSelectedRow()==-1){
+            if(tblProduct.getRowCount()==0){
+                IMessage.setText("Table is empty");
+            }else{
+                IMessage.setText("You must select a product");
+            }
+        }else{
+            
+        model.setValueAt(tfProName.getText(), tblProduct.getSelectedRow(), 0);
+        model.setValueAt(cbCategory.getSelectedItem().toString(), tblProduct.getSelectedRow(), 1);
+        model.setValueAt(tfPrice.getText(), tblProduct.getSelectedRow(), 2);
+        }
+    }//GEN-LAST:event_bUpdateActionPerformed
 
     /**
      * @param args the command line arguments
