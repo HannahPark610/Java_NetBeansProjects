@@ -39,6 +39,8 @@ public class ProductTable extends javax.swing.JFrame {
         bUpdate = new javax.swing.JButton();
         bDelete = new javax.swing.JButton();
         IMessage = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextPane1 = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,6 +52,11 @@ public class ProductTable extends javax.swing.JFrame {
                 "Product Name", "Category", "Price"
             }
         ));
+        tblProduct.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblProductMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblProduct);
 
         jLabel1.setText("Product Name :");
@@ -75,8 +82,15 @@ public class ProductTable extends javax.swing.JFrame {
         });
 
         bDelete.setText("Delete");
+        bDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bDeleteActionPerformed(evt);
+            }
+        });
 
         IMessage.setForeground(new java.awt.Color(255, 102, 102));
+
+        jScrollPane2.setViewportView(jTextPane1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -85,7 +99,10 @@ public class ProductTable extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -103,7 +120,7 @@ public class ProductTable extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bDelete))
                     .addComponent(IMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,8 +144,13 @@ public class ProductTable extends javax.swing.JFrame {
                     .addComponent(bDelete))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(IMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(72, 72, 72)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(28, 28, 28))
         );
 
@@ -162,6 +184,26 @@ public class ProductTable extends javax.swing.JFrame {
         model.setValueAt(tfPrice.getText(), tblProduct.getSelectedRow(), 2);
         }
     }//GEN-LAST:event_bUpdateActionPerformed
+
+    private void tblProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductMouseClicked
+        DefaultTableModel model = (DefaultTableModel) tblProduct.getModel();
+        tfProName.setText(model.getValueAt(tblProduct.getSelectedRow(), 0).toString());
+        cbCategory.setSelectedItem(model.getValueAt(tblProduct.getSelectedRow(), 1).toString());
+        tfPrice.setText(model.getValueAt(tblProduct.getSelectedRow(), 2).toString());
+    }//GEN-LAST:event_tblProductMouseClicked
+
+    private void bDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDeleteActionPerformed
+        DefaultTableModel model = (DefaultTableModel) tblProduct.getModel();
+        if(tblProduct.getSelectedRow()==-1){
+            if(tblProduct.getRowCount()==0){
+                IMessage.setText("Table is empty");
+            }else{
+                IMessage.setText("You must select a product");
+            }
+        }else{
+            model.removeRow(tblProduct.getSelectedRow());
+        }
+    }//GEN-LAST:event_bDeleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -208,6 +250,8 @@ public class ProductTable extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextPane jTextPane1;
     private javax.swing.JTable tblProduct;
     private javax.swing.JTextField tfPrice;
     private javax.swing.JTextField tfProName;
