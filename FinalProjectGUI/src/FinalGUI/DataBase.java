@@ -22,10 +22,10 @@ public class DataBase {
         Connection myconObj = null;
         Statement mystatObj = null;
         ResultSet myresObj = null;
-        String query = "Select * from Hanna.ShoesStockTable";
+        String query = "Select * from Hannah.ShoesStockTable";
 
         try {
-            myconObj = DriverManager.getConnection("jdbc:derby://localhost1527/StockDatabase", "Hannah", "12345");
+            myconObj = DriverManager.getConnection("jdbc:derby://localhost:1527/StockDatabase", "Hannah", "12345");
             mystatObj = myconObj.createStatement();
             myresObj = mystatObj.executeQuery(query);
             while (myresObj.next()) {
