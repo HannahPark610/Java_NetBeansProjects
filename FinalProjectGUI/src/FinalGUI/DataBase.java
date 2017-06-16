@@ -5,6 +5,7 @@
  */
 package FinalGUI;
 
+import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -19,38 +20,54 @@ import java.sql.Statement;
 public class DataBase {
 
     public static void main(String[] args) {
-
-        Connection myconObj = null;
-        Statement mystatObj = null;
-        ResultSet myresObj = null;
-        ResultSetMetaData mymeta = null;
-        String query = "Select * from Hannah.ShoesStockTable";
-
+        
         try {
-            myconObj = DriverManager.getConnection("jdbc:derby://localhost:1527/StockDatabase", "Hannah", "12345");
-            mystatObj = myconObj.createStatement();
-            myresObj = mystatObj.executeQuery(query);
-            mymeta = myresObj.getMetaData();
-            int coloumnNo = mymeta.getColumnCount();
-//            System.out.println(coloumnNo);
-            for (int i = 1; i<=coloumnNo; i++){
-                System.out.print(mymeta.getColumnName(i)+"\t");
-            }
-            System.out.println();
+            
+            Connection myconObj = DriverManager.getConnection("jdbc:derby://localhost:1527/StockDatabase", "Hannah", "12345");
+            Statement mystatObj = myconObj.createStatement();
+            ResultSet myresObj = mystatObj.executeQuery("Select * from Hannah.ShoesStockTable");
             while (myresObj.next()) {
-                for (int i = 1; i<=coloumnNo; i++) {
-                     System.out.print(myresObj.getObject(i)+"\t");
-                }
-                System.out.println();
-//                String typeOfShoes = myresObj.getString("TypeOfShoes");
-//                String color = myresObj.getString("Color");
-//                Double size = myresObj.getDouble("Size");
-//                int stock = myresObj.getInt("Stock");
-//                System.out.println(typeOfShoes + "\t  " + color + "\t  " + size + "\t  "+ stock);
+//                for (int i = 1; i<=coloumnNo; i++) {
+//                     System.out.print(myresObj.getObject(i)+"\t");
+//                }
+                System.out.println(myresObj.getString(1));
+                System.out.println(myresObj.getString(2));
+                System.out.println(myresObj.getString(3));
+                System.out.println(myresObj.getString(4));
+                System.out.println("-------------------------");
+                
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-
+        } catch (Exception e) {
+            
+            System.out.println(e.getMessage());
         }
     }
 }
+//        Connection myconObj = null;
+//        Statement mystatObj = null;
+//        ResultSet myresObj = null;
+//        ResultSetMetaData mymeta = null;
+//        String query = "Select * from Hannah.ShoesStockTable";
+//
+//        try {
+//            myconObj = DriverManager.getConnection("jdbc:derby://localhost:1527/StockDatabase", "Hannah", "12345");
+//            mystatObj = myconObj.createStatement();
+//            myresObj = mystatObj.executeQuery(query);
+//            mymeta = myresObj.getMetaData();
+//            int coloumnNo = mymeta.getColumnCount();
+//            for (int i = 1; i<=coloumnNo; i++){
+//                System.out.print(mymeta.getColumnName(i)+"\t");
+//            }
+//            System.out.println();
+//            while (myresObj.next()) {
+//                for (int i = 1; i<=coloumnNo; i++) {
+//                     System.out.print(myresObj.getObject(i)+"\t");
+//                }
+//                System.out.println();
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//
+//        }
+//    }
+//}
