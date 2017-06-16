@@ -34,11 +34,12 @@ public class DataBase {
             int coloumnNo = mymeta.getColumnCount();
 //            System.out.println(coloumnNo);
             for (int i = 1; i<=coloumnNo; i++){
-                System.out.println(mymeta.getColumnName(i)+"\t");
+                System.out.print(mymeta.getColumnName(i)+"\t");
             }
+            System.out.println();
             while (myresObj.next()) {
-                for (int i = 1; i<=coloumnNo; i++){
-                     System.out.println(myresObj.getObject(i)+"\t");
+                for (int i = 1; i<=coloumnNo; i++) {
+                     System.out.print(myresObj.getObject(i)+"\t");
                 }
                 System.out.println();
 //                String typeOfShoes = myresObj.getString("TypeOfShoes");
