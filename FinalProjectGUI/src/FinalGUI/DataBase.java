@@ -31,6 +31,7 @@ public class DataBase {
 //                for (int i = 1; i<=coloumnNo; i++) {
 //                     System.out.print(myresObj.getObject(i)+"\t");
 //                }
+                System.out.println(myresObj.getString(0));
                 System.out.println(myresObj.getString(1));
                 System.out.println(myresObj.getString(2));
                 System.out.println(myresObj.getString(3));

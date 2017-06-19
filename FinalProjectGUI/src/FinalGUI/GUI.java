@@ -14,6 +14,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 public class GUI extends javax.swing.JFrame implements ListSelectionListener  {
     
@@ -27,12 +28,13 @@ public class GUI extends javax.swing.JFrame implements ListSelectionListener  {
         rowSelMod.addListSelectionListener(this);
     }
     public void valueChanged(ListSelectionEvent le) {
-        int rows = ShoesStockTable.getSelectedRow();
-        typeOfShoes.setText(ShoesStockTable.getValueAt(rows, 1).toString());
-        color.setText(ShoesStockTable.getValueAt(rows, 2).toString());
-        size.setText(ShoesStockTable.getValueAt(rows, 3).toString());
-        stock.setText(ShoesStockTable.getValueAt(rows, 4).toString());
-   
+//        int rows = ShoesStockTable.getSelectedRow();
+//        typeOfShoes.setText(ShoesStockTable.getValueAt(rows, 1).toString());
+//        color.setText(ShoesStockTable.getValueAt(rows, 2).toString());
+//        size.setText(ShoesStockTable.getValueAt(rows, 3).toString());
+//        stock.setText(ShoesStockTable.getValueAt(rows, 4).toString());
+//        shoeid.setText(ShoesStockTable.getValueAt(rows, 5).toString());
+//   
     }
 
     
@@ -103,6 +105,7 @@ public class GUI extends javax.swing.JFrame implements ListSelectionListener  {
         jLabel5 = new javax.swing.JLabel();
         shoeid = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -162,9 +165,12 @@ public class GUI extends javax.swing.JFrame implements ListSelectionListener  {
 
         lMessage.setForeground(new java.awt.Color(255, 51, 51));
 
-        jLabel5.setText("ShoeID");
+        jLabel5.setText("Shoes ID");
 
         jButton1.setText("Reset");
+
+        jLabel6.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        jLabel6.setText("Shoes Stock List");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -173,11 +179,6 @@ public class GUI extends javax.swing.JFrame implements ListSelectionListener  {
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(shoeid, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(217, 217, 217))
                     .addComponent(lMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -199,13 +200,23 @@ public class GUI extends javax.swing.JFrame implements ListSelectionListener  {
                             .addComponent(bUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(bAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(bDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel6)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(shoeid, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(217, 217, 217)))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(86, 86, 86)
+                .addGap(21, 21, 21)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(shoeid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -241,9 +252,9 @@ public class GUI extends javax.swing.JFrame implements ListSelectionListener  {
                     .addComponent(size, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17))
+                .addGap(25, 25, 25))
         );
 
         bindingGroup.bind();
@@ -282,52 +293,63 @@ public class GUI extends javax.swing.JFrame implements ListSelectionListener  {
     }//GEN-LAST:event_bAddActionPerformed
 
     private void bDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDeleteActionPerformed
-           DefaultTableModel model = (DefaultTableModel) ShoesStockTable.getModel();
-        if(ShoesStockTable.getSelectedRow()==-1){
-            if(ShoesStockTable.getRowCount()==0){
-                lMessage.setText("Table is empty");
-            }else{
-                lMessage.setText("You must select a product");
-            }
-        }else{
-            model.removeRow(ShoesStockTable.getSelectedRow());
-        }      
+//           DefaultTableModel model = (DefaultTableModel) ShoesStockTable.getModel();
+//        if(ShoesStockTable.getSelectedRow()==-1){
+//            if(ShoesStockTable.getRowCount()==0){
+//                lMessage.setText("Table is empty");
+//            }else{
+//                lMessage.setText("You must select a product");
+//            }
+//        }else{
+//            model.removeRow(ShoesStockTable.getSelectedRow());
+//        }      
     }//GEN-LAST:event_bDeleteActionPerformed
 
     private void bUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bUpdateActionPerformed
-        lMessage.setText("");
-        DefaultTableModel model = (DefaultTableModel) ShoesStockTable.getModel();
-        if(ShoesStockTable.getSelectedRow()==-1){
-            if(ShoesStockTable.getRowCount()==0){
-                lMessage.setText("Table is empty");
-            }else{
-                lMessage.setText("You must select a product");
-            }
-        }else{
-            
-        model.setValueAt(typeOfShoes.getText(), ShoesStockTable.getSelectedRow(), 0);
-        model.setValueAt(color.getText(), ShoesStockTable.getSelectedRow(), 1);
-        model.setValueAt(size.getText(), ShoesStockTable.getSelectedRow(), 2);
-        model.setValueAt(stock.getText(), ShoesStockTable.getSelectedRow(), 3);
-        }      
+    Statement st = null;
+        try {
+          getConnection();
+          st = con.createStatement();
+          String queryco = "Update SHOESSTOCKTABLE set typeOfShoes = '" + typeOfShoes.getText() + "', color = '" + color.getText() +"', "
+                  + "size = " + Double.parseDouble(size.getText())
+                  + ", stock = " + Integer.parseInt(stock.getText()) 
+                  + " where shoeid = " + Integer.parseInt(shoeid.getText());
+         
+//          String queryco = "Update SHOESSTOCKTABLE set color = 'black', size = 5, stock = 10 where shoeid = 1";
+//                  + "  ('"+
+//                  typeOfShoes.getText() + "','" + 
+//                  color.getText() + "',"+
+//                  Double.parseDouble(size.getText()) + "," +
+//                  Integer.parseInt(stock.getText()) + "," +
+//                  Integer.parseInt(shoeid.getText()) + ")";
+                  
+         st.executeUpdate(queryco);
+         con.commit();
+         usersList();
+      } catch (SQLException ex) {
+          Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+      }
     }//GEN-LAST:event_bUpdateActionPerformed
 
     private void ShoesStockTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ShoesStockTableMouseClicked
+        
+        TableModel model = ShoesStockTable.getModel();
+        int row = ShoesStockTable.getSelectedRow();
+        int col = 0;
+        System.out.println("row=" + row + " col=" + col);
 
-        
-        
-        
-        
-        
-    }//GEN-LAST:event_ShoesStockTableMouseClicked
+        typeOfShoes.setText(model.getValueAt(row, 1).toString());
+        color.setText(model.getValueAt(row, 2).toString());
+        size.setText(model.getValueAt(row, 3).toString());
+        stock.setText(model.getValueAt(row, 4).toString());
+        shoeid.setText(model.getValueAt(row, 0).toString());
 
-//    private void ShoesStockTableMouseClicked(java.awt.event.MouseEvent evt) {                                        
-//        DefaultTableModel model = (DefaultTableModel) ShoesStockTable.getModel();
-//        typeOfShoes.setText(model.getValueAt(ShoesStockTable.getSelectedRow(), 0).toString());
 //        color.setText(model.getValueAt(ShoesStockTable.getSelectedRow(), 1).toString());
 //        size.setText(model.getValueAt(ShoesStockTable.getSelectedRow(), 2).toString());
 //        stock.setText(model.getValueAt(ShoesStockTable.getSelectedRow(), 3).toString());
-//    }  
+//        shoeid.setText(model.getValueAt(ShoesStockTable.getSelectedRow(), 4).toString());
+    }//GEN-LAST:event_ShoesStockTableMouseClicked
+ 
     
     /**
      * @param args the command line arguments
@@ -380,6 +402,7 @@ public class GUI extends javax.swing.JFrame implements ListSelectionListener  {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lMessage;
     private javax.swing.JTextField shoeid;
