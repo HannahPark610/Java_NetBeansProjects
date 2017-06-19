@@ -12,6 +12,8 @@ public class GUI extends javax.swing.JFrame {
         initComponents();
     }
 
+    
+    Show_Jtable_row_data jtRowData = new Show_Jtable_row_data();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -60,7 +62,18 @@ public class GUI extends javax.swing.JFrame {
         columnBinding.setColumnClass(Integer.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
+        ShoesStockTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ShoesStockTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(ShoesStockTable);
+        if (ShoesStockTable.getColumnModel().getColumnCount() > 0) {
+            ShoesStockTable.getColumnModel().getColumn(0).setHeaderValue("Shoeid");
+            ShoesStockTable.getColumnModel().getColumn(1).setHeaderValue("Typeofshoes");
+            ShoesStockTable.getColumnModel().getColumn(2).setHeaderValue("Color");
+            ShoesStockTable.getColumnModel().getColumn(3).setHeaderValue("Size");
+        }
 
         bAdd.setText("Add");
         bAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -126,7 +139,7 @@ public class GUI extends javax.swing.JFrame {
                                     .addComponent(color, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(stock, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,14 +165,13 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(5, 5, 5)
-                        .addComponent(bUpdate)
-                        .addGap(31, 31, 31))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(bUpdate))
+                    .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                        .addComponent(lMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(12, 12, 12)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         bindingGroup.bind();
@@ -209,13 +221,17 @@ public class GUI extends javax.swing.JFrame {
         }      
     }//GEN-LAST:event_bUpdateActionPerformed
 
-    private void ShoesStockTableMouseClicked(java.awt.event.MouseEvent evt) {                                        
-        DefaultTableModel model = (DefaultTableModel) ShoesStockTable.getModel();
-        typeOfShoes.setText(model.getValueAt(ShoesStockTable.getSelectedRow(), 0).toString());
-        color.setText(model.getValueAt(ShoesStockTable.getSelectedRow(), 1).toString());
-        size.setText(model.getValueAt(ShoesStockTable.getSelectedRow(), 2).toString());
-        stock.setText(model.getValueAt(ShoesStockTable.getSelectedRow(), 3).toString());
-    }  
+    private void ShoesStockTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ShoesStockTableMouseClicked
+
+    }//GEN-LAST:event_ShoesStockTableMouseClicked
+
+//    private void ShoesStockTableMouseClicked(java.awt.event.MouseEvent evt) {                                        
+//        DefaultTableModel model = (DefaultTableModel) ShoesStockTable.getModel();
+//        typeOfShoes.setText(model.getValueAt(ShoesStockTable.getSelectedRow(), 0).toString());
+//        color.setText(model.getValueAt(ShoesStockTable.getSelectedRow(), 1).toString());
+//        size.setText(model.getValueAt(ShoesStockTable.getSelectedRow(), 2).toString());
+//        stock.setText(model.getValueAt(ShoesStockTable.getSelectedRow(), 3).toString());
+//    }  
     
     /**
      * @param args the command line arguments
