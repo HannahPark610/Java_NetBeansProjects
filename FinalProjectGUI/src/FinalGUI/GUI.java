@@ -104,7 +104,6 @@ public class GUI extends javax.swing.JFrame implements ListSelectionListener {
         jLabel5 = new javax.swing.JLabel();
         shoeid = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        bRefresh = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -169,13 +168,6 @@ public class GUI extends javax.swing.JFrame implements ListSelectionListener {
         jLabel6.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel6.setText("Shoes Stock List");
 
-        bRefresh.setText("Refresh");
-        bRefresh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bRefreshActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -203,8 +195,7 @@ public class GUI extends javax.swing.JFrame implements ListSelectionListener {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(bUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                             .addComponent(bAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                            .addComponent(bDelete, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                            .addComponent(bRefresh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(bDelete, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel6)
@@ -250,9 +241,7 @@ public class GUI extends javax.swing.JFrame implements ListSelectionListener {
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(stock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(bRefresh))
+                    .addComponent(stock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(size, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -287,21 +276,43 @@ public class GUI extends javax.swing.JFrame implements ListSelectionListener {
                     + Integer.parseInt(stock.getText()) + ","
                     + Integer.parseInt(shoeid.getText()) + ")";
 
-            //  pst.addBatch(queryco);
             st.executeUpdate(queryco);
             con.commit();
+            
 //            DefaultTableModel model = new DefaultTableModel();
 //            ShoesStockTable.setModel(model);
-            //model.setRowCount(0);
+//            model.setRowCount(0);
+
+            
+            DefaultTableModel model1 = new DefaultTableModel(new String[]{"SHOEID", "TYPEOFSHOES", "COLOR", "SIZE", "STOCK"}, 0);
+            String sql = "SELECT * FROM ShoesStockTable";
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                String a = rs.getString("SHOEID");
+                String b = rs.getString("TYPEOFSHOES");
+                String c = rs.getString("COLOR");
+                String d = rs.getString("SIZE");
+                String e = rs.getString("STOCK");
+                model1.addRow(new Object[]{a, b, c, d, e});
+            }
+            ShoesStockTable.setModel(model1);
+
             // con.close();
 //         model.fireTableDataChanged();
         } catch (SQLException ex) {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("add");
+
     }//GEN-LAST:event_bAddActionPerformed
 
     private void bDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDeleteActionPerformed
+        
+        MyTableModel mymodel=(MyTableModel)table.getModel();
+               int rowcount= mymodel.getRowCount();
+               for(int i = 0;i<rowcount;i++){
+                   mymodel.removeRow(0);
+               }
+        
         Statement st = null;
         try {
             getConnection();
@@ -313,7 +324,21 @@ public class GUI extends javax.swing.JFrame implements ListSelectionListener {
 
             st.executeUpdate(queryco);
             con.commit();
-            usersList();
+            
+            DefaultTableModel model1 = new DefaultTableModel(new String[]{"SHOEID", "TYPEOFSHOES", "COLOR", "SIZE", "STOCK"}, 0);
+            String sql = "SELECT * FROM ShoesStockTable";
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                String a = rs.getString("SHOEID");
+                String b = rs.getString("TYPEOFSHOES");
+                String c = rs.getString("COLOR");
+                String d = rs.getString("SIZE");
+                String e = rs.getString("STOCK");
+                model1.addRow(new Object[]{a, b, c, d, e});
+            }
+            ShoesStockTable.setModel(model1);
+
+            //usersList();
         } catch (SQLException ex) {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -339,6 +364,20 @@ public class GUI extends javax.swing.JFrame implements ListSelectionListener {
 //                  Integer.parseInt(shoeid.getText()) + ")";
             st.executeUpdate(queryco);
             con.commit();
+            
+            DefaultTableModel model1 = new DefaultTableModel(new String[]{"SHOEID", "TYPEOFSHOES", "COLOR", "SIZE", "STOCK"}, 0);
+            String sql = "SELECT * FROM ShoesStockTable";
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                String a = rs.getString("SHOEID");
+                String b = rs.getString("TYPEOFSHOES");
+                String c = rs.getString("COLOR");
+                String d = rs.getString("SIZE");
+                String e = rs.getString("STOCK");
+                model1.addRow(new Object[]{a, b, c, d, e});
+            }
+            ShoesStockTable.setModel(model1);
+            
             usersList();
         } catch (SQLException ex) {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -370,16 +409,6 @@ public class GUI extends javax.swing.JFrame implements ListSelectionListener {
         jtRowData.show_jstock.setText(model.getValueAt(row, 4).toString());
 
     }//GEN-LAST:event_ShoesStockTableMouseClicked
-
-    private void bRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRefreshActionPerformed
-        // TODO add your handling code here:
-        StockDatabasePUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("StockDatabasePU").createEntityManager();
-        shoesstocktableQuery = java.beans.Beans.isDesignTime() ? null : StockDatabasePUEntityManager.createQuery("SELECT s FROM Shoesstocktable s");
-        shoesstocktableList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : shoesstocktableQuery.getResultList();
-        shoesstocktableQuery1 = java.beans.Beans.isDesignTime() ? null : StockDatabasePUEntityManager.createQuery("SELECT s FROM Shoesstocktable s");
-        shoesstocktableList1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : shoesstocktableQuery1.getResultList();
-        
-    }//GEN-LAST:event_bRefreshActionPerformed
 
     /**
      * @param args the command line arguments
@@ -422,7 +451,6 @@ public class GUI extends javax.swing.JFrame implements ListSelectionListener {
     private javax.persistence.EntityManager StockDatabasePUEntityManager;
     private javax.swing.JButton bAdd;
     private javax.swing.JButton bDelete;
-    private javax.swing.JButton bRefresh;
     private javax.swing.JButton bUpdate;
     private javax.swing.JTextField color;
     private javax.swing.JLabel jLabel1;
