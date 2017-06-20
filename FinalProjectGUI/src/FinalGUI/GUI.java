@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -27,6 +28,9 @@ public class GUI extends javax.swing.JFrame implements ListSelectionListener  {
         ListSelectionModel rowSelMod = ShoesStockTable.getSelectionModel();
         rowSelMod.addListSelectionListener(this);
     }
+    
+    Show_Jtable_row_data jtRowData = new Show_Jtable_row_data();
+    
     public void valueChanged(ListSelectionEvent le) {
 //        int rows = ShoesStockTable.getSelectedRow();
 //        typeOfShoes.setText(ShoesStockTable.getValueAt(rows, 1).toString());
@@ -74,8 +78,6 @@ public class GUI extends javax.swing.JFrame implements ListSelectionListener  {
         }
         return usersList;
     }
-    
-//    Show_Jtable_row_data jtRowData = new Show_Jtable_row_data();
     
     
     @SuppressWarnings("unchecked")
@@ -293,16 +295,22 @@ public class GUI extends javax.swing.JFrame implements ListSelectionListener  {
     }//GEN-LAST:event_bAddActionPerformed
 
     private void bDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDeleteActionPerformed
-//           DefaultTableModel model = (DefaultTableModel) ShoesStockTable.getModel();
-//        if(ShoesStockTable.getSelectedRow()==-1){
-//            if(ShoesStockTable.getRowCount()==0){
-//                lMessage.setText("Table is empty");
-//            }else{
-//                lMessage.setText("You must select a product");
-//            }
-//        }else{
-//            model.removeRow(ShoesStockTable.getSelectedRow());
-//        }      
+      Statement st = null;
+        try {
+          getConnection();
+          st = con.createStatement();
+         String queryco = "Delete From SHOESSTOCKTABLE where TypeOfShoes = '" + typeOfShoes.getText() + "', color = '" + color.getText() +"', "
+                  + "size = " + Double.parseDouble(size.getText())
+                  + ", stock = " + Integer.parseInt(stock.getText()) 
+                  + " where shoeid = " + Integer.parseInt(shoeid.getText());
+         
+                st.executeUpdate(queryco);
+         con.commit();
+         usersList();
+      } catch (SQLException ex) {
+          Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+      }
+ 
     }//GEN-LAST:event_bDeleteActionPerformed
 
     private void bUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bUpdateActionPerformed
@@ -343,11 +351,18 @@ public class GUI extends javax.swing.JFrame implements ListSelectionListener  {
         size.setText(model.getValueAt(row, 3).toString());
         stock.setText(model.getValueAt(row, 4).toString());
         shoeid.setText(model.getValueAt(row, 0).toString());
+        
+        jtRowData.setVisible(true);
+        jtRowData.pack();
+        jtRowData.setLocationRelativeTo(null);
+        jtRowData.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
+        jtRowData.show_jtypeOfShoesid.setText(model.getValueAt(row, 0).toString());
+        jtRowData.show_jtypeOfShoes.setText(model.getValueAt(row, 1).toString());
+        jtRowData.show_jcolor.setText(model.getValueAt(row, 2).toString());
+        jtRowData.show_jsize.setText(model.getValueAt(row, 3).toString());
+        jtRowData.show_jstock.setText(model.getValueAt(row, 4).toString()); 
 
-//        color.setText(model.getValueAt(ShoesStockTable.getSelectedRow(), 1).toString());
-//        size.setText(model.getValueAt(ShoesStockTable.getSelectedRow(), 2).toString());
-//        stock.setText(model.getValueAt(ShoesStockTable.getSelectedRow(), 3).toString());
-//        shoeid.setText(model.getValueAt(ShoesStockTable.getSelectedRow(), 4).toString());
     }//GEN-LAST:event_ShoesStockTableMouseClicked
  
     
