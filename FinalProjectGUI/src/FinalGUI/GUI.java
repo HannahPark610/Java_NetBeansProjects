@@ -271,6 +271,7 @@ public class GUI extends javax.swing.JFrame implements ListSelectionListener {
                     + Integer.parseInt(shoeid.getText()) + ")";
 
             st.executeUpdate(queryco);
+//            System.out.println(queryco);
             con.commit();
             
             DefaultTableModel model1 = new DefaultTableModel(new String[]{"SHOEID", "TYPEOFSHOES", "COLOR", "SIZE", "STOCK"}, 0);
@@ -283,11 +284,14 @@ public class GUI extends javax.swing.JFrame implements ListSelectionListener {
                 String d = rs.getString("SIZE");
                 String e = rs.getString("STOCK");
                 model1.addRow(new Object[]{a, b, c, d, e});
+               
             }
+            con.close();
+            rs.close();
+            st.close();
             ShoesStockTable.setModel(model1);
-
-            // con.close();
-//         model.fireTableDataChanged();
+   
+            
         } catch (SQLException ex) {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -297,7 +301,7 @@ public class GUI extends javax.swing.JFrame implements ListSelectionListener {
     private void bDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDeleteActionPerformed
   
         Statement st = null;
-        Connection con = null;
+//        Connection con = null;
        
         try {
             
@@ -308,6 +312,11 @@ public class GUI extends javax.swing.JFrame implements ListSelectionListener {
             + ", stock = " + Integer.parseInt(stock.getText())
             + " where shoeid = " + Integer.parseInt(shoeid.getText());
            
+            
+//            st.executeUpdate(queryco);
+            System.out.println(queryco);
+            con.commit();
+            
             DefaultTableModel model1 = new DefaultTableModel(new String[]{"SHOEID", "TYPEOFSHOES", "COLOR", "SIZE", "STOCK"}, 0);
             String sql = "SELECT * FROM ShoesStockTable";
             ResultSet rs = st.executeQuery(sql);
@@ -318,16 +327,13 @@ public class GUI extends javax.swing.JFrame implements ListSelectionListener {
                 String d = rs.getString("SIZE");
                 String e = rs.getString("STOCK");
                 model1.addRow(new Object[]{a, b, c, d, e});
-                
-                
-                st.executeUpdate(queryco);
-                con.commit();
-                con.close();
             
             }
+            con.close();
+            rs.close();
+            st.close();
+            usersList();
             ShoesStockTable.setModel(model1);
-
-            //usersList();
         } catch (SQLException ex) {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -344,7 +350,8 @@ public class GUI extends javax.swing.JFrame implements ListSelectionListener {
                     + ", stock = " + Integer.parseInt(stock.getText())
                     + " where shoeid = " + Integer.parseInt(shoeid.getText());
 
-            st.executeUpdate(queryco);
+           st.executeUpdate(queryco);
+ //           System.out.println(queryco);
             con.commit();
             
             DefaultTableModel model1 = new DefaultTableModel(new String[]{"SHOEID", "TYPEOFSHOES", "COLOR", "SIZE", "STOCK"}, 0);
@@ -357,10 +364,15 @@ public class GUI extends javax.swing.JFrame implements ListSelectionListener {
                 String d = rs.getString("SIZE");
                 String e = rs.getString("STOCK");
                 model1.addRow(new Object[]{a, b, c, d, e});
+                
             }
+            
+            con.close();
+            rs.close();
+            st.close();
+            usersList();
             ShoesStockTable.setModel(model1);
             
-            usersList();
         } catch (SQLException ex) {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         }
