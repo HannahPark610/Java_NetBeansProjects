@@ -62,7 +62,7 @@ public class GUI extends javax.swing.JFrame implements ListSelectionListener {
         ResultSet rs;
 
         try {
-            st = connection.createStatement();
+            st = con.createStatement();
             rs = st.executeQuery(query);
             User user;
             while (rs.next()) {
@@ -260,13 +260,7 @@ public class GUI extends javax.swing.JFrame implements ListSelectionListener {
         Statement st = null;
         try {
             lMessage.setText("");
-//          DefaultTableModel model = (DefaultTableModel) ShoesStockTable.getModel();
-//          if(!typeOfShoes.getText().trim().equals("")){
-//              model.addRow(new Object[] {color.getText(),size.getText(), stock.getText()});
-//              
-//          }else{
-//              lMessage.setText("Type of Shoes should not be left blank");
-//          }
+
             getConnection();
             st = con.createStatement();
             String queryco = "Insert into SHOESSTOCKTABLE(TYPEOFSHOES,COLOR,SIZE,STOCK,SHOEID) values  ('"
@@ -278,11 +272,6 @@ public class GUI extends javax.swing.JFrame implements ListSelectionListener {
 
             st.executeUpdate(queryco);
             con.commit();
-            
-//            DefaultTableModel model = new DefaultTableModel();
-//            ShoesStockTable.setModel(model);
-//            model.setRowCount(0);
-
             
             DefaultTableModel model1 = new DefaultTableModel(new String[]{"SHOEID", "TYPEOFSHOES", "COLOR", "SIZE", "STOCK"}, 0);
             String sql = "SELECT * FROM ShoesStockTable";
@@ -306,25 +295,19 @@ public class GUI extends javax.swing.JFrame implements ListSelectionListener {
     }//GEN-LAST:event_bAddActionPerformed
 
     private void bDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDeleteActionPerformed
-        
-        MyTableModel mymodel=(MyTableModel)table.getModel();
-               int rowcount= mymodel.getRowCount();
-               for(int i = 0;i<rowcount;i++){
-                   mymodel.removeRow(0);
-               }
-        
+  
         Statement st = null;
+        Connection con = null;
+       
         try {
+            
             getConnection();
             st = con.createStatement();
             String queryco = "Delete From SHOESSTOCKTABLE where TypeOfShoes = '" + typeOfShoes.getText() + "', color = '" + color.getText() + "', "
-                    + "size = " + Double.parseDouble(size.getText())
-                    + ", stock = " + Integer.parseInt(stock.getText())
-                    + " where shoeid = " + Integer.parseInt(shoeid.getText());
-
-            st.executeUpdate(queryco);
-            con.commit();
-            
+            + "size = " + Double.parseDouble(size.getText())
+            + ", stock = " + Integer.parseInt(stock.getText())
+            + " where shoeid = " + Integer.parseInt(shoeid.getText());
+           
             DefaultTableModel model1 = new DefaultTableModel(new String[]{"SHOEID", "TYPEOFSHOES", "COLOR", "SIZE", "STOCK"}, 0);
             String sql = "SELECT * FROM ShoesStockTable";
             ResultSet rs = st.executeQuery(sql);
@@ -335,6 +318,12 @@ public class GUI extends javax.swing.JFrame implements ListSelectionListener {
                 String d = rs.getString("SIZE");
                 String e = rs.getString("STOCK");
                 model1.addRow(new Object[]{a, b, c, d, e});
+                
+                
+                st.executeUpdate(queryco);
+                con.commit();
+                con.close();
+            
             }
             ShoesStockTable.setModel(model1);
 
@@ -355,13 +344,6 @@ public class GUI extends javax.swing.JFrame implements ListSelectionListener {
                     + ", stock = " + Integer.parseInt(stock.getText())
                     + " where shoeid = " + Integer.parseInt(shoeid.getText());
 
-//          String queryco = "Update SHOESSTOCKTABLE set color = 'black', size = 5, stock = 10 where shoeid = 1";
-//                  + "  ('"+
-//                  typeOfShoes.getText() + "','" + 
-//                  color.getText() + "',"+
-//                  Double.parseDouble(size.getText()) + "," +
-//                  Integer.parseInt(stock.getText()) + "," +
-//                  Integer.parseInt(shoeid.getText()) + ")";
             st.executeUpdate(queryco);
             con.commit();
             
